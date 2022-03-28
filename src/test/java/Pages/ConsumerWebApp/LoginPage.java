@@ -12,6 +12,9 @@ public class LoginPage {
 
 	WebDriver driver;
 	
+	@FindBy(xpath="//h1[text()='Welcome Back']")
+	WebElement text;
+	
 	@FindBy(id="email")
 	WebElement emailele;
 	
@@ -21,13 +24,17 @@ public class LoginPage {
 	@FindBy(xpath="//button[@type='submit']")
 	WebElement loginbtn;
 	
-	public LoginPage(WebDriver ldriver)	{
-		this.driver = ldriver;
+	public LoginPage(WebDriver driver)	{
+		this.driver = driver;
+	}
+	
+	public boolean validateText() {
+		ApcoaListeners.logInfo("Checking the text");
+		return text.isDisplayed();
 	}
 	
 	public void enterCredentials(String email, String password){
-		ApcoaListeners.logInfo("Going to enter credentials in Dashboard");
-		//GenericMethods.explicitWait(driver, By.id("email"), 100);
+		ApcoaListeners.logInfo("Going to enter credentials");
 		emailele.sendKeys(email);
 		passwordele.sendKeys(password);
 		ApcoaListeners.logInfo("Sucessfully Entered email: "+email);
@@ -40,7 +47,6 @@ public class LoginPage {
 		loginbtn.sendKeys(Keys.RETURN);
 		ApcoaListeners.logInfo("Clicked on Continue Sucessfully");
 	}
-	
 	
 }
 
