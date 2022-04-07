@@ -5,7 +5,8 @@
     <classes>
       <class name="ConsumerApp.ConsumerTest">
         <methods>
-          <include name="goTo"/>
+          <include name="gotoUrl"/>
+          <include name="login"/>
           <include name="initializeDriver"/>
         </methods>
       </class> <!-- ConsumerApp.ConsumerTest -->
