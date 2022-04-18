@@ -1,12 +1,13 @@
 package MobileObjectMapper;
 
 public class ParkingMapper {
-	
-	private String parkingname;
+
+    private String parkingname;
     private String parkingidentifier;
     private String currency;
-    
-    public ParkingMapper(){}
+
+    public ParkingMapper() {
+    }
 
     public String getCurrency() {
         return currency;
@@ -15,7 +16,7 @@ public class ParkingMapper {
     public void setCurrencysymbol(String currency) {
         this.currency = currency;
     }
- 
+
     public String getParkingname() {
         return parkingname;
     }
@@ -34,10 +35,10 @@ public class ParkingMapper {
 
     @Override
     public String toString() {
-        return  "ParkingMapper{" +
+        return "ParkingMapper{" +
                 "parkingname='" + parkingname + '\'' +
                 ", parkingidentifier='" + parkingidentifier + '\'' +
-                ", currency='" + currency+ '\'' +  
+                ", currency='" + currency + '\'' +
                 '}';
     }
 }

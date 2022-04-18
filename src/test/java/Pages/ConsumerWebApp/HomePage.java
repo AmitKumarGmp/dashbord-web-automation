@@ -6,24 +6,24 @@ import org.openqa.selenium.support.FindBy;
 import TestNGListeners.ApcoaListeners;
 
 public class HomePage {
-	
+
 	WebDriver driver;
-	
-	@FindBy(id="headingTextBig")
+
+	@FindBy(id = "headingTextBig")
 	WebElement text;
-	
-	@FindBy(xpath="//p[contains(text(),'Login')]")
+
+	@FindBy(xpath = "//p[contains(text(),'Login')]")
 	WebElement login;
-	
-	public HomePage(WebDriver driver)	{
+
+	public HomePage(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public boolean validateText() {
 		ApcoaListeners.logInfo("Checking the text");
 		return text.isDisplayed();
 	}
-	
+
 	public void clickLogin() {
 		ApcoaListeners.logInfo("Going to click login button");
 		login.click();

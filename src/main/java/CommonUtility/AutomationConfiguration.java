@@ -29,23 +29,26 @@ public class AutomationConfiguration {
 	public static HashMap<String, String> MainPackages = new HashMap<>();
 	static {
 		try {
-			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString()+"/Output/Logs/"));
-		} catch (IOException e) {	}
+			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString() + "/Output/Logs/"));
+		} catch (IOException e) {
+		}
 		try {
-			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString()+"/Output/Reports/"));
-		} catch (IOException e) {}
+			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString() + "/Output/Reports/"));
+		} catch (IOException e) {
+		}
 		try {
-			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString()+"/Output/Screenshot/"));
-		} catch (IOException e) {	}
+			Files.createDirectories(Paths.get(System.getProperty("user.dir").toString() + "/Output/Screenshot/"));
+		} catch (IOException e) {
+		}
 		MainPackages.put("APCOA STAGING", "com.apcoaflow.consumer.staging");
 		MainPackages.put("APCOA QA", "com.apcoaflow.consumer.qa");
 		MainPackages.put("APCOA DEV", "com.apcoaflow.consumer.dev");
-		
+
 		MainPackages.put("GMP STAGING", "com.gmpuser.app.staging");
 		MainPackages.put("GMP QA", "com.gmpuser.app.qa");
-		MainPackages.put("GMP DEV", "com.gmpuser.app.dev");	
-	} 
- 	public static WebDriver Driver;
+		MainPackages.put("GMP DEV", "com.gmpuser.app.dev");
+	}
+	public static WebDriver Driver;
 	public static AppiumDriver<WebElement> AppiumDriver;
 	public static Properties PropertyFile;
 	public static DesiredCapabilities DesiredCap;
@@ -64,37 +67,34 @@ public class AutomationConfiguration {
 	public static String Platform;
 	public static String Runner;
 	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
-	
-	
-	public static void logInfo(String info){
+
+	public static void logInfo(String info) {
 		System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss  ").format(new Date()).toString() + info);
 		AutomationConfiguration.Log.info(info);
-	}	
-	
-	public static void onFail(WebDriver driver,String msg){
-		AutomationConfiguration.extentTest.get().log(Status.FAIL, " Reason for failure: "+msg);
+	}
+
+	public static void onFail(WebDriver driver, String msg) {
+		AutomationConfiguration.extentTest.get().log(Status.FAIL, " Reason for failure: " + msg);
 		addScreenshotToReport(msg);
 	}
-	
+
 	public static void addScreenshotToReport(String msg) {
-		WebDriver screenshotdriver ;
-		try{
-			if(AutomationConfiguration.ScreenshotFor.toString().toUpperCase().contains ("WEB")){
+		WebDriver screenshotdriver;
+		try {
+			if (AutomationConfiguration.ScreenshotFor.toString().toUpperCase().contains("WEB")) {
 				screenshotdriver = AutomationConfiguration.Driver;
+			} else {
+				screenshotdriver = AutomationConfiguration.AppiumDriver;
 			}
-			else{
-				screenshotdriver= AutomationConfiguration.AppiumDriver;
-			}
-			File scr = ((TakesScreenshot)screenshotdriver).getScreenshotAs(OutputType.FILE);		
-			String filename = System.getProperty("user.dir").toString()+"/Output/Screenshot/"+ new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss'.jpg'").format(new Date()).toString();
-			File dest = new File( filename); 
+			File scr = ((TakesScreenshot) screenshotdriver).getScreenshotAs(OutputType.FILE);
+			String filename = System.getProperty("user.dir").toString() + "/Output/Screenshot/"
+					+ new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss'.jpg'").format(new Date()).toString();
+			File dest = new File(filename);
 			FileUtils.copyFile(scr, dest);
 			AutomationConfiguration.extentTest.get().addScreenCaptureFromPath(dest.getAbsolutePath(), msg);
-		}catch (Exception e){
-			logInfo("Error in TestNG Listner(taking screenshot on failure): "+e.toString());
-		} 	
+		} catch (Exception e) {
+			logInfo("Error in TestNG Listner(taking screenshot on failure): " + e.toString());
+		}
 	}
-	
-	
-	
+
 }

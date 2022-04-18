@@ -1,13 +1,13 @@
 package ConsumerWebApp.ObjectMapper;
 
 public class ProfileMapper {
-	private String number;
+    private String number;
     private String address;
     private String city;
     private String state;
     private String country;
     private String zipcode;
-   
+
     public ProfileMapper() {
     }
 
@@ -26,6 +26,7 @@ public class ProfileMapper {
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getCityname() {
         return city;
     }
@@ -33,7 +34,7 @@ public class ProfileMapper {
     public void setCityname(String city) {
         this.city = city;
     }
-    
+
     public String getStatename() {
         return state;
     }
@@ -41,7 +42,7 @@ public class ProfileMapper {
     public void setStatename(String state) {
         this.state = state;
     }
-    
+
     public String getCountryname() {
         return country;
     }
@@ -49,7 +50,7 @@ public class ProfileMapper {
     public void setCountryname(String country) {
         this.country = country;
     }
-    
+
     public String getZipcode() {
         return zipcode;
     }
@@ -57,7 +58,7 @@ public class ProfileMapper {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
-    
+
     @Override
     public String toString() {
         return "ProfileMapper{" +

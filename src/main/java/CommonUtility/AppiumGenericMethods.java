@@ -41,40 +41,35 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
-
 /**
  * contains basic functionality for the Appium.
  *
  */
 
-public class AppiumGenericMethods extends CreateSession 
-{
-	WebDriver driver ;
+public class AppiumGenericMethods extends CreateSession {
+    WebDriver driver;
 
-	
-	public static void threadWait(AppiumDriver<MobileElement> driver, long time) throws InterruptedException {
-		synchronized (driver) {
-			driver.wait(time);
-		}
-	}
-	
-	
+    public static void threadWait(AppiumDriver<MobileElement> driver, long time) throws InterruptedException {
+        synchronized (driver) {
+            driver.wait(time);
+        }
+    }
+
     // common timeout for all tests can be set here
     public final int timeOut = 40;
 
-    public AppiumGenericMethods(WebDriver driver)
-    {
+    public AppiumGenericMethods(WebDriver driver) {
         this.driver = driver;
     }
-    
+
     /**
-	 * method to check element present or not.
-	 * @param targetElement for the targeted Element
-	 * 
-	 * @return true if element is present and false if not present
-	 */
-    public Boolean isElementPresent(By targetElement) throws InterruptedException 
-    {
+     * method to check element present or not.
+     * 
+     * @param targetElement for the targeted Element
+     * 
+     * @return true if element is present and false if not present
+     */
+    public Boolean isElementPresent(By targetElement) throws InterruptedException {
         Boolean isPresent = driver.findElements(targetElement).size() > 0;
         return isPresent;
     }
@@ -83,8 +78,7 @@ public class AppiumGenericMethods extends CreateSession
      * method to hide keyboard
      */
     @SuppressWarnings("unchecked")
-	public void hideKeyboard() 
-    {
+    public void hideKeyboard() {
         ((AppiumDriver<WebElement>) driver).hideKeyboard();
     }
 
@@ -92,12 +86,9 @@ public class AppiumGenericMethods extends CreateSession
      * method to go back by Android Native back click
      */
     @SuppressWarnings("unchecked")
-	public void back() 
-    {
+    public void back() {
         ((AndroidDriver<WebElement>) driver).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
     }
-
-    
 
     /**
      * method to tap on the screen on provided coordinates
@@ -113,23 +104,19 @@ public class AppiumGenericMethods extends CreateSession
         js.executeScript("mobile: tap", tapObject);
     }
 
-
     /**
      * method to find an element
      *
      * @param locator element to be found
      * @return WebElement if found else throws NoSuchElementException
      */
-    public WebElement findElement(By locator)
-    {
+    public WebElement findElement(By locator) {
         try {
             WebElement element = driver.findElement(locator);
             return element;
-        } 
-        catch (NoSuchElementException e) 
-        {
-        	AutomationConfiguration.Log.error("Element not found");
-        	throw e;
+        } catch (NoSuchElementException e) {
+            AutomationConfiguration.Log.error("Element not found");
+            throw e;
         }
     }
 
@@ -137,21 +124,19 @@ public class AppiumGenericMethods extends CreateSession
      * method to find all the elements of specific locator
      *
      * @param locator element to be found
-     * @return return the list of elements if found else throws NoSuchElementException
+     * @return return the list of elements if found else throws
+     *         NoSuchElementException
      */
-    public List<WebElement> findElements(By locator) 
-    {
-        try 
-        {
+    public List<WebElement> findElements(By locator) {
+        try {
             List<WebElement> element = driver.findElements(locator);
             return element;
-        } 
-        catch (NoSuchElementException e) 
-        {
-            //Log.logError(this.getClass().getName(), "findElements", "element not found" + locator);
-        	AutomationConfiguration.Log.error("Element not found");
-        	
-        	throw e;
+        } catch (NoSuchElementException e) {
+            // Log.logError(this.getClass().getName(), "findElements", "element not found" +
+            // locator);
+            AutomationConfiguration.Log.error("Element not found");
+
+            throw e;
         }
     }
 
@@ -160,16 +145,12 @@ public class AppiumGenericMethods extends CreateSession
      *
      * @return message text which is displayed
      */
-    public String getAlertText()
-    {
-        try
-        {
+    public String getAlertText() {
+        try {
             Alert alert = driver.switchTo().alert();
             String alertText = alert.getText();
             return alertText;
-        } 
-        catch (NoAlertPresentException e) 
-        {
+        } catch (NoAlertPresentException e) {
             throw e;
         }
     }
@@ -179,17 +160,13 @@ public class AppiumGenericMethods extends CreateSession
      *
      * @return returns true if alert is present else false
      */
-    public boolean isAlertPresent() 
-    {
-        try 
-        {
+    public boolean isAlertPresent() {
+        try {
             WebDriverWait wait = new WebDriverWait(driver, timeOut);
             wait.until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert();
             return true;
-        } 
-        catch (NoAlertPresentException e) 
-        {
+        } catch (NoAlertPresentException e) {
             throw e;
         }
     }
@@ -198,8 +175,7 @@ public class AppiumGenericMethods extends CreateSession
      * method to Accept Alert if alert is present
      */
 
-    public void acceptAlert()
-    {
+    public void acceptAlert() {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
@@ -209,8 +185,7 @@ public class AppiumGenericMethods extends CreateSession
      * method to Dismiss Alert if alert is present
      */
 
-    public void dismissAlert()
-    {
+    public void dismissAlert() {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().dismiss();
@@ -220,11 +195,9 @@ public class AppiumGenericMethods extends CreateSession
      * method to get network settings
      */
     @SuppressWarnings("unchecked")
-	public void getNetworkConnection() 
-    {
+    public void getNetworkConnection() {
         System.out.println(((AndroidDriver<WebElement>) driver).getConnection());
     }
-
 
     /**
      * method to set network settings
@@ -234,8 +207,7 @@ public class AppiumGenericMethods extends CreateSession
      * @param data         pass true to activate data mode else false
      */
     @SuppressWarnings("unchecked")
-	public void setNetworkConnection(boolean airplaneMode, boolean wifi, boolean data)
-    {
+    public void setNetworkConnection(boolean airplaneMode, boolean wifi, boolean data) {
 
         long mode = 1L;
 
@@ -247,17 +219,15 @@ public class AppiumGenericMethods extends CreateSession
 
         ConnectionState connectionState = new ConnectionState(mode);
         ((AndroidDriver<WebElement>) driver).setConnection(connectionState);
-        System.out.println("Your current connection settings are :" + ((AndroidDriver<WebElement>) driver).getConnection());
+        System.out.println(
+                "Your current connection settings are :" + ((AndroidDriver<WebElement>) driver).getConnection());
     }
 
-
-   
     /**
      * method to get all the context handles at particular screen
      */
     @SuppressWarnings("unchecked")
-	public void getContext() 
-    {
+    public void getContext() {
         ((AppiumDriver<WebElement>) driver).getContextHandles();
     }
 
@@ -267,19 +237,15 @@ public class AppiumGenericMethods extends CreateSession
      * @param context view to be set
      */
     @SuppressWarnings("unchecked")
-	public void setContext(String context)
-    {
+    public void setContext(String context) {
 
         Set<String> contextNames = ((AppiumDriver<WebElement>) driver).getContextHandles();
 
-        if (contextNames.contains(context)) 
-        {
+        if (contextNames.contains(context)) {
             ((AppiumDriver<WebElement>) driver).context(context);
             AutomationConfiguration.Log.info("Context changed successfully");
-        } 
-        else 
-        {
-        	AutomationConfiguration.Log.info(context + "not found on this page");
+        } else {
+            AutomationConfiguration.Log.info(context + "not found on this page");
         }
 
         AutomationConfiguration.logInfo("Current context" + ((AppiumDriver<WebElement>) driver).getContext());
@@ -290,23 +256,21 @@ public class AppiumGenericMethods extends CreateSession
      *
      * @param locator element to be long pressed
      */
-    public void longPress(By locator) 
-    {
+    public void longPress(By locator) {
         try {
             WebElement element = driver.findElement(locator);
 
             @SuppressWarnings("rawtypes")
-			TouchAction touch = new TouchAction((MobileDriver) driver);
+            TouchAction touch = new TouchAction((MobileDriver) driver);
             LongPressOptions longPressOptions = new LongPressOptions();
             longPressOptions.withElement(ElementOption.element(element));
             touch.longPress(longPressOptions).release().perform();
             AutomationConfiguration.logInfo("Long press successful on element: " + element);
-        } 
-        catch (NoSuchElementException e) 
-        {
-            //Log.logError(this.getClass().getName(), "findElement", "Element not found" + locator);
-        	AutomationConfiguration.Log.error("Element not found");
-        	throw e;
+        } catch (NoSuchElementException e) {
+            // Log.logError(this.getClass().getName(), "findElement", "Element not found" +
+            // locator);
+            AutomationConfiguration.Log.error("Element not found");
+            throw e;
         }
 
     }
@@ -317,12 +281,11 @@ public class AppiumGenericMethods extends CreateSession
      * @param x x offset
      * @param y y offset
      */
-    public void longPress(int x, int y) 
-    {
+    public void longPress(int x, int y) {
         @SuppressWarnings({ "unchecked", "rawtypes" })
-		TouchAction touch = new TouchAction((MobileDriver<WebElement>) driver);
+        TouchAction touch = new TouchAction((MobileDriver<WebElement>) driver);
         @SuppressWarnings("rawtypes")
-		PointOption pointOption = new PointOption();
+        PointOption pointOption = new PointOption();
         pointOption.withCoordinates(x, y);
         touch.longPress(pointOption).release().perform();
         AutomationConfiguration.logInfo("Long press successful on coordinates: " + "( " + x + "," + y + " )");
@@ -337,23 +300,22 @@ public class AppiumGenericMethods extends CreateSession
      * @param y       y offset
      */
     @SuppressWarnings("rawtypes")
-	public void longPress(By locator, int x, int y) 
-    {
-        try
-        {
+    public void longPress(By locator, int x, int y) {
+        try {
             WebElement element = driver.findElement(locator);
             @SuppressWarnings("unchecked")
-			TouchAction touch = new TouchAction((MobileDriver<WebElement>) driver);
+            TouchAction touch = new TouchAction((MobileDriver<WebElement>) driver);
             LongPressOptions longPressOptions = new LongPressOptions();
-            longPressOptions.withPosition(new PointOption().withCoordinates(x, y)).withElement(ElementOption.element(element));
+            longPressOptions.withPosition(new PointOption().withCoordinates(x, y))
+                    .withElement(ElementOption.element(element));
             touch.longPress(longPressOptions).release().perform();
-            AutomationConfiguration.logInfo("Long press successful on element: " + element + "on coordinates" + "( " + x + "," + y + " )");
-        } 
-        catch (NoSuchElementException e) 
-        {
-            //Log.logError(this.getClass().getName(), "findElement", "Element not found" + locator);
-        	AutomationConfiguration.Log.error("Element not found");
-        	throw e;
+            AutomationConfiguration.logInfo(
+                    "Long press successful on element: " + element + "on coordinates" + "( " + x + "," + y + " )");
+        } catch (NoSuchElementException e) {
+            // Log.logError(this.getClass().getName(), "findElement", "Element not found" +
+            // locator);
+            AutomationConfiguration.Log.error("Element not found");
+            throw e;
         }
 
     }
@@ -368,8 +330,7 @@ public class AppiumGenericMethods extends CreateSession
      * @param duration duration to be tapped
      */
 
-    public void swipe(double startX, double startY, double endX, double endY, double duration)
-    {
+    public void swipe(double startX, double startY, double endX, double endY, double duration) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         HashMap<String, Double> swipeObject = new HashMap<String, Double>();
         // swipeObject.put("touchCount", 1.0);
@@ -381,10 +342,9 @@ public class AppiumGenericMethods extends CreateSession
         js.executeScript("mobile: swipe", swipeObject);
     }
 
-
-    static String UiScrollable(String uiSelector) 
-    {
-        return "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(" + uiSelector + ".instance(0));";
+    static String UiScrollable(String uiSelector) {
+        return "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(" + uiSelector
+                + ".instance(0));";
     }
 
     /**
@@ -392,8 +352,7 @@ public class AppiumGenericMethods extends CreateSession
      */
 
     @SuppressWarnings("unchecked")
-	public void openNotifications() 
-    {
+    public void openNotifications() {
         ((AndroidDriver<WebElement>) driver).openNotifications();
     }
 
@@ -402,11 +361,9 @@ public class AppiumGenericMethods extends CreateSession
      */
 
     @SuppressWarnings("unchecked")
-	public void launchApp() 
-    {
+    public void launchApp() {
         ((AppiumDriver<WebElement>) driver).launchApp();
     }
-
 
     /**
      * method to click on Element By Name
@@ -415,8 +372,7 @@ public class AppiumGenericMethods extends CreateSession
      */
 
     @SuppressWarnings("unchecked")
-	public void click(String elementByName)
-    {
+    public void click(String elementByName) {
         ((AppiumDriver<WebElement>) driver).findElementByName(elementByName).click();
     }
 
@@ -427,23 +383,20 @@ public class AppiumGenericMethods extends CreateSession
      * @param durationForSwipe time duration of a swipe operation
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public void scrollDown(int swipeTimes, int durationForSwipe) 
-    {
+    public void scrollDown(int swipeTimes, int durationForSwipe) {
         Dimension dimension = driver.manage().window().getSize();
 
-        for (int i = 1; i <= swipeTimes; i++) 
-        {
+        for (int i = 1; i <= swipeTimes; i++) {
             int start = (int) (dimension.getHeight() * 0.5);
             int end = (int) (dimension.getHeight() * 0.3);
             int x = (int) (dimension.getWidth() * .5);
 
-
-            new TouchAction((AppiumDriver<WebElement>) driver).press(PointOption.point(x, start)).moveTo(PointOption.point(x, end))
+            new TouchAction((AppiumDriver<WebElement>) driver).press(PointOption.point(x, start))
+                    .moveTo(PointOption.point(x, end))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(durationForSwipe)))
                     .release().perform();
         }
     }
-
 
     /**
      * method to scroll up on screen from java-client 6
@@ -452,23 +405,19 @@ public class AppiumGenericMethods extends CreateSession
      * @param durationForSwipe time duration of a swipe operation
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public void scrollUp(int swipeTimes, int durationForSwipe)
-    {
+    public void scrollUp(int swipeTimes, int durationForSwipe) {
         Dimension dimension = driver.manage().window().getSize();
 
-        for (int i = 0; i <= swipeTimes; i++) 
-        {
+        for (int i = 0; i <= swipeTimes; i++) {
             int start = (int) (dimension.getHeight() * 0.3);
             int end = (int) (dimension.getHeight() * 0.5);
             int x = (int) (dimension.getWidth() * .5);
 
-
-            new TouchAction((AppiumDriver<WebElement>) driver).press(PointOption.point(x, start)).moveTo(PointOption.point(x, end))
+            new TouchAction((AppiumDriver<WebElement>) driver).press(PointOption.point(x, start))
+                    .moveTo(PointOption.point(x, end))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(durationForSwipe)))
                     .release().perform();
         }
     }
-
-
 
 }

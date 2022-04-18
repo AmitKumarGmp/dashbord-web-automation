@@ -8,31 +8,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import TestNGListeners.ApcoaListeners;
 
-public class VechilePage{
+public class VechilePage {
 	WebDriver driver;
-	
-	@FindBy(xpath="//p[text()='Vehicle(s)']")
+
+	@FindBy(xpath = "//p[text()='Vehicle(s)']")
 	WebElement vehicle;
-	
-	@FindBy(xpath="//span[text()='Add a Vehicle']")
+
+	@FindBy(xpath = "//span[text()='Add a Vehicle']")
 	WebElement addVehicle;
-	
-	@FindBy(xpath="//li[@data-value='Alabama']")
+
+	@FindBy(xpath = "//li[@data-value='Alabama']")
 	WebElement state;
-	
-	@FindBy(id="mui-component-select-state")
+
+	@FindBy(id = "mui-component-select-state")
 	WebElement dropdown;
-	
-	@FindBy(name="vehicleNumber")
+
+	@FindBy(name = "vehicleNumber")
 	WebElement vehicleNumber;
-	
-	@FindBy(name="displayName")
+
+	@FindBy(name = "displayName")
 	WebElement nickName;
-	
-	public VechilePage(WebDriver driver){
+
+	public VechilePage(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public void addVechile() {
 		ApcoaListeners.logInfo("Clicking on Add vechile ");
 		vehicle.click();
@@ -42,6 +42,5 @@ public class VechilePage{
 		vehicleNumber.sendKeys("BT2000");
 		nickName.sendKeys("Car");
 
-		
 	}
 }

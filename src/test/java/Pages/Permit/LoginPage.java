@@ -10,36 +10,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 	WebDriver driver;
-	
-	@FindBy(id="email")
+
+	@FindBy(id = "email")
 	WebElement emailele;
-	
-	@FindBy(id="password")
+
+	@FindBy(id = "password")
 	WebElement passwordele;
-	
-	@FindBy(className="MuiButton-label")
+
+	@FindBy(className = "MuiButton-label")
 	WebElement login;
-	
-	public LoginPage (WebDriver driver) {
+
+	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	public void setUserCredentials(String email,String password ) {	
+
+	public void setUserCredentials(String email, String password) {
 		emailele.sendKeys(email);
 		passwordele.sendKeys(password);
-		
+
 	}
+
 	public void clickLogin() {
 		login.click();
 	}
+
 	public boolean checklogin() {
 		String expectedUrl = "https://global-qa-copy1.di8ln77nkrd5v.amplifyapp.com/app/v2";
 		try {
-			 WebDriverWait wait = new WebDriverWait(driver, 2);
+			WebDriverWait wait = new WebDriverWait(driver, 2);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("headingTextSmall")));
-			Assert.assertEquals(driver.getCurrentUrl(), expectedUrl,"Login Failed");
-		}catch(Throwable err) {
+			Assert.assertEquals(driver.getCurrentUrl(), expectedUrl, "Login Failed");
+		} catch (Throwable err) {
 			return false;
 		}
-		return true;	
+		return true;
 	}
 }

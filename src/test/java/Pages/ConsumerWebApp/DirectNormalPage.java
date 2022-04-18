@@ -12,65 +12,62 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ConsumerWebApp.ObjectMapper.PermitMapper;
 import TestNGListeners.ApcoaListeners;
 
-
 public class DirectNormalPage {
 	WebDriver driver;
-	
-	@FindBy(xpath="//span[text()='Choose Parking']")
+
+	@FindBy(xpath = "//span[text()='Choose Parking']")
 	WebElement text;
-	
-	@FindBy(xpath="//p[text()='Continue']")
+
+	@FindBy(xpath = "//p[text()='Continue']")
 	WebElement continuele;
-	
-	@FindBy(xpath="//span[text()='Agree']")
+
+	@FindBy(xpath = "//span[text()='Agree']")
 	WebElement tap;
-	
-    @FindBy(name="rnr")
+
+	@FindBy(name = "rnr")
 	WebElement agree;
-    
-    @FindBy(xpath="//span[text()='Payment Summary']//following::h5[@class='MuiTypography-root MuiTypography-h5']")
-  	WebElement total;
-	
-	@FindBy(xpath="//span[contains(text(),'Buy Permit')]")
+
+	@FindBy(xpath = "//span[text()='Payment Summary']//following::h5[@class='MuiTypography-root MuiTypography-h5']")
+	WebElement total;
+
+	@FindBy(xpath = "//span[contains(text(),'Buy Permit')]")
 	WebElement buy;
-	
-	@FindBy(xpath="//span[text()='Go to My Permits']")
+
+	@FindBy(xpath = "//span[text()='Go to My Permits']")
 	WebElement mypermits;
-	
-	@FindBy(xpath="//span[text()='Active']")
+
+	@FindBy(xpath = "//span[text()='Active']")
 	WebElement active;
-	
-	@FindBy(xpath="//h5[@class='MuiTypography-root MuiTypography-h5']")
+
+	@FindBy(xpath = "//h5[@class='MuiTypography-root MuiTypography-h5']")
 	WebElement total_2;;
-	
-	
+
 	public DirectNormalPage(WebDriver driver) {
-		this.driver=driver;
+		this.driver = driver;
 	}
-	
+
 	public boolean validateText() {
 		ApcoaListeners.logInfo("Checking the text");
 		return text.isDisplayed();
 	}
-	
+
 	public void buyPermit(PermitMapper permitmapper) {
 		try {
 			ApcoaListeners.logInfo("Selecting permit for direct buy");
-			String permit_name = permitmapper.getPermitname	();
-		    driver.findElement(By.xpath("//p[contains(text(),'"+permit_name+"')]")).click();
-		    ApcoaListeners.logInfo("Permit for direct buy :"+permit_name);
-			
-		}
-		catch(Exception e) {
-		
-		ApcoaListeners.logInfo("Selecting permit for direct buy");
-		driver.findElement(By.xpath("(//input[@aria-label='A'])[1]")).click();
-		Actions actions = new Actions(driver);
-		actions.keyDown(Keys.CONTROL).sendKeys(Keys.END).perform();
-		String permit_name = permitmapper.getPermitname	();
-	    driver.findElement(By.xpath("//p[contains(text(),'"+permit_name+"')]")).click();
-	    ApcoaListeners.logInfo("Permit for direct buy :"+permit_name);
-			
+			String permit_name = permitmapper.getPermitname();
+			driver.findElement(By.xpath("//p[contains(text(),'" + permit_name + "')]")).click();
+			ApcoaListeners.logInfo("Permit for direct buy :" + permit_name);
+
+		} catch (Exception e) {
+
+			ApcoaListeners.logInfo("Selecting permit for direct buy");
+			driver.findElement(By.xpath("(//input[@aria-label='A'])[1]")).click();
+			Actions actions = new Actions(driver);
+			actions.keyDown(Keys.CONTROL).sendKeys(Keys.END).perform();
+			String permit_name = permitmapper.getPermitname();
+			driver.findElement(By.xpath("//p[contains(text(),'" + permit_name + "')]")).click();
+			ApcoaListeners.logInfo("Permit for direct buy :" + permit_name);
+
 		}
 	}
 
@@ -81,38 +78,34 @@ public class DirectNormalPage {
 		tap.click();
 
 	}
-	
+
 	public String validateAmount() {
-	ApcoaListeners.logInfo("Geting the total price of the permit");
-	return total.getText();
-}
-	
+		ApcoaListeners.logInfo("Geting the total price of the permit");
+		return total.getText();
+	}
+
 	public void directBuy() {
 		ApcoaListeners.logInfo("Going to buy permit");
 		buy.click();
 		ApcoaListeners.logInfo("Going to Mypermit page");
 		mypermits.click();
 	}
-	
+
 	public void active() {
-		ApcoaListeners.logInfo("Checking permit details");	
+		ApcoaListeners.logInfo("Checking permit details");
 		active.click();
-		
+
 	}
-	
+
 	public void check() {
-		Actions action =new Actions(driver);
-		WebElement ele =driver.findElement(By.cssSelector("div[id='scrollBox']>div:first-of-type"));
-		action.doubleClick(ele).perform();	
-		ApcoaListeners.logInfo("Working");	
+		Actions action = new Actions(driver);
+		WebElement ele = driver.findElement(By.cssSelector("div[id='scrollBox']>div:first-of-type"));
+		action.doubleClick(ele).perform();
+		ApcoaListeners.logInfo("Working");
 	}
-	
+
 	public String verifyAmount() {
 		ApcoaListeners.logInfo("Geting the total price of the permit");
 		return total_2.getText();
 	}
 }
-
-
-
-

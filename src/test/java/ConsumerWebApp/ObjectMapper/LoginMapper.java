@@ -1,9 +1,9 @@
 package ConsumerWebApp.ObjectMapper;
 
 public class LoginMapper {
-	private String useremail;
+    private String useremail;
     private String password;
-   
+
     public LoginMapper() {
     }
 
@@ -23,7 +23,6 @@ public class LoginMapper {
         this.password = password;
     }
 
-    
     @Override
     public String toString() {
         return "LoginMapper{" +

@@ -23,7 +23,6 @@ import Pages.Permit.SendForApproval;
 
 public class Smoke {
 
-
 	String useremail = "testing@yopmail.com";
 	String password = "testing";
 	String location = "Bangalore";
@@ -33,22 +32,23 @@ public class Smoke {
 	String state = "Uttarakhand";
 	String country = "India";
 	String zipcode = "236002";
-	String town ="Bangalore";
+	String town = "Bangalore";
 	WebDriver driver;
+
 	@Test
 	public void loginTestPOM() {
 
 		driver = AutomationConfiguration.Driver;
 		LoginPage loginPage = new LoginPage(driver);
 
-		loginPage.setUserCredentials(useremail,password);
+		loginPage.setUserCredentials(useremail, password);
 		loginPage.clickLogin();
 
-		Assert.assertEquals(loginPage.checklogin(),true,"Something Went Wrong");
-		// choose location 
+		Assert.assertEquals(loginPage.checklogin(), true, "Something Went Wrong");
+		// choose location
 		ChooseLocation chooselocation = new ChooseLocation(driver);
 		chooselocation.enterLocation(location);
-		// choose permit 
+		// choose permit
 		ChoosePermit choosePermit = new ChoosePermit(driver);
 		choosePermit.choosePermit();
 		// send for approval
@@ -58,19 +58,19 @@ public class Smoke {
 		approval.sendForApproval();
 		approval.myPermits();
 		// buy permits
-		BuyPermit buy =new BuyPermit(driver);
+		BuyPermit buy = new BuyPermit(driver);
 		buy.choosepermit();
 		buy.entercity(town);
 		buy.buypermit();
 		buy.clicks();
 		// Check the permit
-		ActivePermit check=new ActivePermit(driver);
+		ActivePermit check = new ActivePermit(driver);
 		check.active();
 		// my permits
 		MyPermit permit = new MyPermit(driver);
 		permit.mypermits();
-		//Details 
-		Details detail =new Details(driver);
+		// Details
+		Details detail = new Details(driver);
 		detail.setContactnumber(contact);
 		detail.setAddress(address);
 		detail.setCity(city);
@@ -82,11 +82,12 @@ public class Smoke {
 	@BeforeMethod
 	public void setup() throws IOException {
 		CreateSession.readConfigFile("/src/test/java/resources/configPermit.properties");
-		AutomationConfiguration.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);     
+		AutomationConfiguration.Driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		AutomationConfiguration.Driver.findElement(By.cssSelector("button[aria-label='menu']")).click();
 		AutomationConfiguration.Driver.findElement(By.linkText("Login")).click();
 	}
 
 	@AfterMethod
-	public void close() {}
+	public void close() {
+	}
 }

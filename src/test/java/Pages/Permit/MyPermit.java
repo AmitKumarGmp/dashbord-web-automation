@@ -6,21 +6,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class MyPermit {
 	WebDriver driver;
-	
-	@FindBy(css="button[aria-label='menu']")
+
+	@FindBy(css = "button[aria-label='menu']")
 	WebElement menu;
-	
-	@FindBy(xpath="//span[contains(text(),'My Profile')]")
+
+	@FindBy(xpath = "//span[contains(text(),'My Profile')]")
 	WebElement profile;
-	
-	public MyPermit(WebDriver driver){
-		
+
+	public MyPermit(WebDriver driver) {
+
 		this.driver = driver;
-		
+
 	}
-	
+
 	public void mypermits() {
-	    menu.click();
+		menu.click();
 		profile.click();
-	}	
+	}
 }

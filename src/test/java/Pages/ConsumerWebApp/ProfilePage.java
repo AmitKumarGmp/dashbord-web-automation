@@ -5,30 +5,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import TestNGListeners.ApcoaListeners;
 
-public class ProfilePage{
+public class ProfilePage {
 	WebDriver driver;
-	
-	@FindBy(css="input[name='phoneNumber']")
+
+	@FindBy(css = "input[name='phoneNumber']")
 	WebElement contactnumber;
-	
-	@FindBy(name="addressFirstLine")
+
+	@FindBy(name = "addressFirstLine")
 	WebElement area;
-	
-	@FindBy(name="city")
+
+	@FindBy(name = "city")
 	WebElement town;
-	
-	@FindBy(name="state")
+
+	@FindBy(name = "state")
 	WebElement place;
-	
-	@FindBy(name="country")
+
+	@FindBy(name = "country")
 	WebElement nation;
-	
-	@FindBy(name="zipCode")
+
+	@FindBy(name = "zipCode")
 	WebElement zipCode;
-	
-	public ProfilePage(WebDriver driver){
+
+	public ProfilePage(WebDriver driver) {
 		this.driver = driver;
 	}
+
 	public void contactNumber() {
 		ApcoaListeners.logInfo("Going to enter contact number");
 		contactnumber.sendKeys("9999988888");
@@ -46,7 +47,7 @@ public class ProfilePage{
 		place.sendKeys("Karnataka");
 		ApcoaListeners.logInfo("Sucessfully Entered state");
 	}
-	
+
 	public void country() {
 		ApcoaListeners.logInfo("Going to enter country");
 		nation.sendKeys("India");

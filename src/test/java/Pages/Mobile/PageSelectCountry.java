@@ -11,74 +11,75 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class PageSelectCountry {
-	
+
 	WebDriver driver;
-	
+
 	By selectCountryName = By.className("android.widget.TextView");
-	
-	@AndroidFindBy(className="android.widget.TextView")
+
+	@AndroidFindBy(className = "android.widget.TextView")
 	List<WebElement> selectCountryButton1;
-	
-	@AndroidFindBy(xpath="//*[contains(@resource-id,':id/text')]")
+
+	@AndroidFindBy(xpath = "//*[contains(@resource-id,':id/text')]")
 	WebElement selectCountryButton;
-	
-	@AndroidFindBy(xpath="//*[contains(@resource-id,':id/tv_login')]")
+
+	@AndroidFindBy(xpath = "//*[contains(@resource-id,':id/tv_login')]")
 	WebElement btnLog;
-	
-	@AndroidFindBy(xpath="//*[contains(@resource-id,':id/tv_next')]")
+
+	@AndroidFindBy(xpath = "//*[contains(@resource-id,':id/tv_next')]")
 	WebElement nextbtn;
-	
-	@AndroidFindBy(xpath="//*[contains(@resource-id,':id/footer_button_1')]")
+
+	@AndroidFindBy(xpath = "//*[contains(@resource-id,':id/footer_button_1')]")
 	WebElement btnfooterok;
-	
+
 	public String CountrySelected = "";
-	
-	public PageSelectCountry(WebDriver appiumDriver){
+
+	public PageSelectCountry(WebDriver appiumDriver) {
 		this.driver = appiumDriver;
-		PageFactory.initElements(new AppiumFieldDecorator (appiumDriver), this);
-	}	
-	
-	public void selectCountry(String countryName) throws InterruptedException{
-		ApcoaListeners.logInfo("Going to Select Country: "+ countryName);
-		GenericMethods.explicitWait(driver, selectCountryName,75);	
-		
+		PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
+	}
+
+	public void selectCountry(String countryName) throws InterruptedException {
+		ApcoaListeners.logInfo("Going to Select Country: " + countryName);
+		GenericMethods.explicitWait(driver, selectCountryName, 75);
+
 		List<WebElement> selectCountry = this.driver.findElements(selectCountryName);
-		for(WebElement singleCountry : selectCountry){
-			ApcoaListeners.logInfo("Country Found: "+singleCountry.getText());
-			if(singleCountry.getText().toUpperCase().equals(countryName.toUpperCase())){
+		for (WebElement singleCountry : selectCountry) {
+			ApcoaListeners.logInfo("Country Found: " + singleCountry.getText());
+			if (singleCountry.getText().toUpperCase().equals(countryName.toUpperCase())) {
 				singleCountry.click();
 				ApcoaListeners.logInfo("Country found and clicked successfully");
 				break;
 			}
 		}
-		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver,selectCountryButton,15);
+		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver, selectCountryButton, 15);
 		CountrySelected = selectCountryButton.getText().toString();
-		ApcoaListeners.logInfo("selectCountry ended: country selected: "+ selectCountryButton.getText());	
+		ApcoaListeners.logInfo("selectCountry ended: country selected: " + selectCountryButton.getText());
 	}
-		
-	public void selectCountryClick() throws InterruptedException{
+
+	public void selectCountryClick() throws InterruptedException {
 		ApcoaListeners.logInfo("Going to click select_country button");
-		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver,selectCountryButton,150);
+		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver, selectCountryButton, 150);
 		Thread.sleep(2000);
 		selectCountryButton.click();
-		ApcoaListeners.logInfo("Clicked select_country button successfully");		
+		ApcoaListeners.logInfo("Clicked select_country button successfully");
 	}
-	
-	public void btnLoginClick() throws InterruptedException{
+
+	public void btnLoginClick() throws InterruptedException {
 		ApcoaListeners.logInfo("Going to click Login button");
-		try{
+		try {
 			Thread.sleep(2000);
 			btnfooterok.click();
-		}catch(Exception e) {}
-		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver,btnLog,150);
+		} catch (Exception e) {
+		}
+		CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver, btnLog, 150);
 		btnLog.click();
 		try {
-			//CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver,nextbtn,30);
-			//nextbtn.click();
-			//PageHomeApcoa home = new PageHomeApcoa(AutomationConfiguration.AppiumDriver);
-			//home.acceptPushNotification();
+			// CommonUtility.GenericMethods.explicitWaitForWebElementOnly(driver,nextbtn,30);
+			// nextbtn.click();
+			// PageHomeApcoa home = new PageHomeApcoa(AutomationConfiguration.AppiumDriver);
+			// home.acceptPushNotification();
 			ApcoaListeners.logInfo("Clicked Login button successfully");
-		}catch(Exception e)
-		{}
+		} catch (Exception e) {
+		}
 	}
 }

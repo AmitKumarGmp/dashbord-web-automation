@@ -11,106 +11,100 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ConsumerWebApp.ObjectMapper.PermitMapper;
 import TestNGListeners.ApcoaListeners;
 
-
 public class DirectDiscountPage {
 	WebDriver driver;
-	
-	@FindBy(xpath="//span[text()='Choose Parking']")
+
+	@FindBy(xpath = "//span[text()='Choose Parking']")
 	WebElement text;
-	
-	@FindBy(xpath="//p[text()='Continue']")
+
+	@FindBy(xpath = "//p[text()='Continue']")
 	WebElement continuele;
-	
-	@FindBy(xpath="//span[text()='Agree']")
+
+	@FindBy(xpath = "//span[text()='Agree']")
 	WebElement tap;
-	
-    @FindBy(id="promoCode")
-   	WebElement promo;
-    
-    @FindBy(xpath="//span[text()='Apply']")
+
+	@FindBy(id = "promoCode")
+	WebElement promo;
+
+	@FindBy(xpath = "//span[text()='Apply']")
 	WebElement apply;
-	
-    @FindBy(name="rnr")
+
+	@FindBy(name = "rnr")
 	WebElement agree;
-    
-    @FindBy(xpath="//span[text()='Payment Summary']//following::h5[@class='MuiTypography-root MuiTypography-h5']")
-  	WebElement total;
-	
-	@FindBy(xpath="//span[contains(text(),'Buy Permit')]")
+
+	@FindBy(xpath = "//span[text()='Payment Summary']//following::h5[@class='MuiTypography-root MuiTypography-h5']")
+	WebElement total;
+
+	@FindBy(xpath = "//span[contains(text(),'Buy Permit')]")
 	WebElement buy;
-	
-	@FindBy(xpath="//span[text()='Go to My Permits']")
+
+	@FindBy(xpath = "//span[text()='Go to My Permits']")
 	WebElement mypermits;
-	
-	@FindBy(xpath="//span[text()='Active']")
+
+	@FindBy(xpath = "//span[text()='Active']")
 	WebElement active;
-	
-	@FindBy(xpath="//h5[@class='MuiTypography-root MuiTypography-h5']")
+
+	@FindBy(xpath = "//h5[@class='MuiTypography-root MuiTypography-h5']")
 	WebElement total_2;;
-	
-	
+
 	public DirectDiscountPage(WebDriver driver) {
-		this.driver=driver;
+		this.driver = driver;
 	}
-	
+
 	public boolean validateText() {
 		ApcoaListeners.logInfo("Checking the text");
 		return text.isDisplayed();
 	}
-	
+
 	public void buyPermit(PermitMapper permitmapper) {
 		ApcoaListeners.logInfo("Selecting permit for direct buy");
 		String permit_name = permitmapper.getPermitname();
-		driver.findElement(By.xpath("//p[contains(text(),'"+permit_name+"')]")).click();
-		ApcoaListeners.logInfo("Permit for direct buy :"+permit_name);
+		driver.findElement(By.xpath("//p[contains(text(),'" + permit_name + "')]")).click();
+		ApcoaListeners.logInfo("Permit for direct buy :" + permit_name);
 	}
 
 	public void clicks() {
 		ApcoaListeners.logInfo("Going to click Continue");
 		continuele.click();
 		ApcoaListeners.logInfo("Going to click Agree");
-			tap.click();
-		
+		tap.click();
+
 	}
-	
+
 	public void enterDiscount(String directcode) {
 		ApcoaListeners.logInfo("Going to enter promocode");
 		promo.sendKeys(directcode);
-		ApcoaListeners.logInfo("Sucessfully Entered location: "+directcode);
+		ApcoaListeners.logInfo("Sucessfully Entered location: " + directcode);
 		apply.click();
-	}	
-	
+	}
+
 	public String validateAmount() {
-	ApcoaListeners.logInfo("Geting the total price of the permit");
-	return total.getText();
-}
-	
+		ApcoaListeners.logInfo("Geting the total price of the permit");
+		return total.getText();
+	}
+
 	public void directBuy() {
 		ApcoaListeners.logInfo("Going to buy permit");
 		buy.click();
 		ApcoaListeners.logInfo("Going to Mypermit page");
 		mypermits.click();
 	}
-	
+
 	public void active() {
-		ApcoaListeners.logInfo("Checking permit details");	
+		ApcoaListeners.logInfo("Checking permit details");
 		active.click();
-		
+
 	}
-	
+
 	public void check() {
-		Actions action =new Actions(driver);
-		WebElement ele =driver.findElement(By.cssSelector("div[id='scrollBox']>div:first-of-type"));
-		action.doubleClick(ele).perform();	
-		ApcoaListeners.logInfo("Working");	
+		Actions action = new Actions(driver);
+		WebElement ele = driver.findElement(By.cssSelector("div[id='scrollBox']>div:first-of-type"));
+		action.doubleClick(ele).perform();
+		ApcoaListeners.logInfo("Working");
 	}
-	
+
 	public String verifyAmount() {
 		ApcoaListeners.logInfo("Geting the total price of the permit");
 		return total_2.getText();
 	}
 }
-
-
-
-

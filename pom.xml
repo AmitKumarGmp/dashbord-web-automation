@@ -5,11 +5,11 @@
 	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>GMP_Automation_Framework</groupId>
-	<artifactId>GMP_Automation_Framework</artifactId>
+	<groupId>GMP_Automation_Framework_web_dashbord</groupId>
+	<artifactId>GMP_Automation_Framework_web_dashbord</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>GMP_Automation_Framework</name>
+	<name>GMP_Automation_Framework_web_dashbord</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 

@@ -1,7 +1,7 @@
 package ConsumerWebApp.ObjectMapper;
 
 public class UrlMapper {
-	private String url;
+    private String url;
 
     public UrlMapper() {
     }
