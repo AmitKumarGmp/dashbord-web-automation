@@ -52,13 +52,16 @@ import junit.framework.Assert;
 
 public class ConsumerTest {
 
-	@Parameters({ "Runner" })
+	@Parameters({ "Runner" ,"consumerId","ParkingName","PermitName"})
 	@BeforeSuite
-	public void initializeDriver(String runner) throws IOException {
+	public void initializeDriver(String runner,String consumerId,String ParkingName,String PermitName) throws IOException {
 		System.err.close();
 		System.setErr(System.out);
 		System.out.println(runner);
 		AutomationConfiguration.Runner = runner;
+		AutomationConfiguration.consumerId = consumerId;
+		AutomationConfiguration.ParkingName=ParkingName;
+		AutomationConfiguration.PermitName=PermitName;
 		CreateSession.readConfigFile("/src/test/java/resources/configConsumerApp.properties");
 
 	}
@@ -234,7 +237,7 @@ public class ConsumerTest {
 	@Test(priority = 0, dataProvider = "getUrlData")
 	public void gotoUrl(UrlMapper urlMapper) {
 		AutomationConfiguration.Driver.get(urlMapper.getUrl());
-		AutomationConfiguration.Driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//		AutomationConfiguration.Driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 
 	}
 
@@ -255,12 +258,11 @@ public class ConsumerTest {
 	 */
 	@Test(priority = 2, dataProvider = "getLoginData")
 	public void login(LoginMapper loginMapper) throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(2000);
 		LoginPage login = new LoginPage(AutomationConfiguration.Driver);
 		PageFactory.initElements(AutomationConfiguration.Driver, login);
 		login.enterCredentials(loginMapper.getUseremail(), loginMapper.getPassword());
 		login.clickLoginBtn();
-
 	}
 
 	/***
@@ -269,9 +271,10 @@ public class ConsumerTest {
 
 	@Test(priority = 3, dataProvider = "getLoginData")
 	public void buy3rdpartypermit(LoginMapper buy3rdpartypermit) throws InterruptedException {
-		Thread.sleep(10000);
-		buy3rdpartypermit buy3rdpartypermit = new buy3rdpartypermit(AutomationConfiguration.Driver);
-		PageFactory.initElements(AutomationConfiguration.Driver, buy3rdpartypermit);
+		Thread.sleep(2000);
+		buy3rdpartypermit buy3rdpermit = new buy3rdpartypermit(AutomationConfiguration.Driver);
+		PageFactory.initElements(AutomationConfiguration.Driver, buy3rdpermit);
+		buy3rdpermit.buy3rdpartypermit(AutomationConfiguration.consumerId,AutomationConfiguration.ParkingName,AutomationConfiguration.PermitName);
 
 	}
 

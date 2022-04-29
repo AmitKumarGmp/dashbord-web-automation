@@ -2,13 +2,24 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 <parameter name="Runner" value="gmpqa"/>
+<parameter name="consumerId" value="108192"/>
+<parameter name="ParkingName" value="GMP [enable working]"/>
+<parameter name="PermitName" value="Permit 3rd Payment"/>
+
 <listeners>
   <listener class-name="TestNGListeners.ApcoaListeners"></listener>
 </listeners>
   <test thread-count="5" name="Test">
     <classes>
-      <class name="ConsumerApp.ConsumerTest"/>
-    </classes>
+			<class name="ConsumerApp.ConsumerTest">
+				<methods>
+					<include name="gotoUrl" />
+					<include name="login" />
+					
+					<include name="buy3rdpartypermit"/>
+				</methods>
+			</class>
+		</classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
 

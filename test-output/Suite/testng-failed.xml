@@ -2,6 +2,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <parameter name="Runner" value="gmpqa"/>
+  <parameter name="PermitName" value="Permit 3rd Payment"/>
+  <parameter name="ParkingName" value="GMP [enable working]"/>
+  <parameter name="consumerId" value="108192"/>
   <listeners>
     <listener class-name="TestNGListeners.ApcoaListeners"/>
   </listeners>
@@ -9,7 +12,7 @@
     <classes>
       <class name="ConsumerApp.ConsumerTest">
         <methods>
-          <include name="login" invocation-numbers="0"/>
+          <include name="buy3rdpartypermit" invocation-numbers="0"/>
           <include name="initializeDriver"/>
         </methods>
       </class> <!-- ConsumerApp.ConsumerTest -->

@@ -67,6 +67,9 @@ public class AutomationConfiguration {
 	public static String Platform;
 	public static String Runner;
 	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+	public static String consumerId;
+	public static String ParkingName;
+	public static String PermitName;
 
 	public static void logInfo(String info) {
 		System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss  ").format(new Date()).toString() + info);
